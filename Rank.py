@@ -1,6 +1,6 @@
 # -----------------------------------------------
 # Program: Campo Minado
-# Developers: Giordano Lanna e Elisa Ribeiro
+# Developers: Giordano Lanna
 # Date: 17/07/2024
 # Language: Python 3.11
 # -----------------------------------------------
