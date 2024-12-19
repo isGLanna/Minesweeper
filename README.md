@@ -64,3 +64,8 @@ The `click_manager` function manages the actions performed in the game:
 - Required libraries:
   ```bash
   pip install pygame
+  pip install sqlite3
+
+## Contributions
+
+This project is open to contributions from any user who wishes to participate. However, it is recommended to refactor the code to align with Python best practices and to improve both readability and maintainability.
