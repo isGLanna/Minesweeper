@@ -1,0 +1,167 @@
+# -----------------------------------------------
+# Program: Campo Minado
+# Developers: Giordano Lanna e Elisa Ribeiro
+# Date: 18/04/2024
+# Language: Python 3.11
+# -----------------------------------------------
+
+import sys
+from Rank import *
+from Settings import *
+
+
+class Background:
+    def __init__(self, called_image):
+        self.corners_radius = 25
+        self.transparent = pygame.Surface((width, height), pygame.SRCALPHA)
+        self.transparent.set_alpha(95)
+        self.image = pygame.image.load(called_image).convert()
+
+        self.image = pygame.transform.smoothscale(self.image, (width, height))
+
+    def transparent_surface(self):
+        pygame.draw.rect(self.transparent, DARKBLUE, (0, 0, 400, 420), border_radius=self.corners_radius)
+        display.blit(self.transparent, (width//2 - 200, 105))
+        pygame.display.update()
+
+    def draw_background(self):
+        display.blit(self.image, (0, 0))
+
+    def get_image(self): return self.image
+
+    def __del__(self): pass
+
+
+# botões interativos com transições entre imagens
+class Buttons:
+    def __init__(self, text, size, image_0, image_1, fonte):
+        super().__init__()
+
+        self.background = Background(screen1)
+        self.text = text
+        self.alpha = 0
+
+        self.image_up = image_0
+        self.image_down = image_1
+
+        self.image_up = pygame.transform.scale(self.image_up, size)
+        self.image_down = pygame.transform.scale(self.image_down, size)
+
+        self.image = self.image_up
+        self.rect = self.image.get_rect()
+        self.rect = self.image_down.get_rect()
+
+        self.click = False
+        self.text_surface = None
+        self.text_rect = None
+
+        self.font = fonte
+
+        self.render_text()
+
+    # renderizar imagem com texto
+    def render_text(self):
+        # definir níveis de opacidade (não faço ideia de como funciona)
+        self.image_up.set_alpha(18)
+        self.image_down.set_alpha(18)
+
+        self.text_surface = self.font.render(self.text, True, WHITE)
+        self.text_rect = self.text_surface.get_rect(center=self.rect.center)
+        self.image_up.blit(self.text_surface, self.text_rect)
+        self.image_down.blit(self.text_surface, self.text_rect)
+        clock.tick(FPS)
+
+    # atualizar botão de acordo com ponteiro
+    def print_display(self, mouse_pos):
+        if self.rect.collidepoint(mouse_pos):
+            display.blit(self.image_down if not self.click else self.image_up, self.rect)
+        else:
+            display.blit(self.image_up if not self.click else self.image_down, self.rect)
+
+    # aguarda algum retorno do usuário para continuar
+    def waiting_for_response(self, image_file, size):
+        image = image_file
+        image = pygame.transform.scale(image, size)
+
+        self.text_surface = self.font.render(self.text, True, WHITE)
+        self.text_rect = self.text_surface.get_rect(center=self.rect.center)
+
+        display.blit(image, self.rect)
+        display.blit(self.text_surface, self.text_rect)
+
+    # retornar condição de colisão: True/False
+    def collision_point(self, pos): return self.rect.collidepoint(pos)
+
+    def down(self): self.click = True
+
+    def up(self): self.click = False
+
+    def __del__(self): pass
+
+
+class GameBox:
+    def __init__(self, size_per_level):
+
+        self.box = pygame.image.load(box1).convert()
+        self.flag = pygame.image.load(flag_i).convert_alpha()
+
+        self.box = pygame.transform.scale(self.box, size_per_level)
+        self.flag = pygame.transform.scale(self.flag, size_per_level)
+
+        self.image = self.box
+        self.rect = self.image.get_rect()
+
+        self.surface = None
+
+    def draw_game(self, flag_no_flag):
+        display.blit(self.box, self.rect)
+        if flag_no_flag == flag:
+            display.blit(self.flag, self.rect)
+
+    def collision_point(self, mouse_pos): return self.rect.collidepoint(mouse_pos)
+
+    def __del__(self): pass
+
+
+class GenericButtons:
+    def __init__(self, size, called_image, collision, text=''):
+        self.size = size
+        self.collision = collision
+        self.text = text
+        self.text_surface = None
+        self.position = []
+
+        self.image = pygame.image.load(called_image).convert_alpha()
+        self.image = pygame.transform.scale(self.image, self.size)
+        self.rect = self.image.get_rect()
+
+        self.lucky = 0
+
+    def draw_button(self):
+        if self.text:
+            self.text_surface = number_font.render(str(self.text), True, BLACK)
+            display.blit(self.text_surface, (self.rect.x + 50, self.rect.y + 8))
+
+        display.blit(self.image, self.rect)
+
+    def collision_point(self, pos): return self.rect.collidepoint(pos)
+
+    def update_flag(self, add):
+        int(self.text)
+        self.text -= add
+        self.draw_button()
+
+    # atualiza imagem após interação
+    def update_lucky(self):
+        self.lucky += 1
+        self.image = pygame.image.load(lucky_i[self.lucky]).convert_alpha()
+        self.image = pygame.transform.scale(self.image, self.size)
+
+    def get_lucky(self): return self.lucky
+
+    def restart_lucky(self): self.lucky = 0
+
+    def __del__(self): pass
+
+
+background = Background(screen1)
