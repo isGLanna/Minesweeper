@@ -6,7 +6,7 @@
 # -----------------------------------------------
 
 from Settings import *
-from Display import GenericButtons
+from ButtonTypes import GenericButtons
 from random import randint
 
 
@@ -74,7 +74,7 @@ class GameMachine:
 
     def limit_time(self, count):  # imprime contagem regressiva
         if self.level:
-            tempo = 250
+            tempo = 200
         else:
             tempo = 350
 
@@ -95,7 +95,7 @@ class GameMachine:
 
         if i <= 0:
             print('O tempo esgotou')
-            declare_defeat()
+            self.declare_defeat()
 
         self.player.set_time(tempo - i)
         count += 1
@@ -117,8 +117,8 @@ class GameMachine:
         display.blit(text, text_rect)
         pygame.display.flip()
 
-        lucky.restart_lucky()
-        self.time_to_exit()
+        self.lucky.restart_lucky()
+        return self.time_to_exit()
 
     def declare_win(self, last_render):
         matrix, bombs, bombs_revealed = self.get_matrix_above(), self.get_bombs(), self.get_revealed()
@@ -149,8 +149,8 @@ class GameMachine:
         display.blit(text, text_rect)
         pygame.display.flip()
         clock.tick(1)
-        lucky.restart_lucky()
-        self.time_to_exit()
+        self.lucky.restart_lucky()
+        return self.time_to_exit()
 
     def discover(self, x, y):
         h, w = self.w, self.h
@@ -217,13 +217,14 @@ class GameMachine:
         while True:
             for event in pygame.event.get():
                 if event.type == QUIT:
-                    quit_game()
+                    pygame.quit()
+                    sys.exit()
                 if event.type == KEYDOWN or event.type == MOUSEBUTTONDOWN:
-                    return main_game_loop()
+                    return "Restart"
 
             timer += 1
             if timer == 90 * 10:
-                return main_game_loop()
+                return "Restart"
             clock.tick(90)
 
     # selecionar e imprimir a cor dos números de 'indicação de bomba' de acordo com o array 'colors'
@@ -235,16 +236,19 @@ class GameMachine:
             return
         else:
             if self.first_occurrence:
-                for i, j in self.position_bomb:
-                    for x in range(max(i - 1, 0), min(i + 2, self.w)):
-                        for y in range(max(j - 1, 0), min(j + 2, self.h)):
-                            self.list_x_y.append((x, y))
+
+                self.list_x_y.extend(
+                    (x, y)
+                    for i, j in self.position_bomb
+                    for x in range(max(i - 1, 0), min(i + 2, self.w))
+                    for y in range(max(j - 1, 0), min(j + 2, self.h))
+                )
+
                 self.first_occurrence = False
 
             for x, y in self.list_x_y:  # Desenhar no contorno da bomba
                 if matrix_above[x][y] == 0:  # Usando matrix_above local
                     if matrix_below[x][y] != mine:
-                        print(matrix_below[x][y])
                         text = number_font.render(
                             str(matrix_below[x][y]), True, colors[matrix_below[x][y]]
                         )
