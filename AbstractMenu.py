@@ -14,7 +14,7 @@ class Menu(ABC):
         self.buttons = []
 
     @abstractmethod
-    def draw_background(self):
+    def draw_background(self): pass
 
     @abstractmethod
     def get_events(self): pass
