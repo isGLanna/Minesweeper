@@ -1,3 +1,10 @@
+# -----------------------------------------------
+# Program: Campo Minado
+# Developers: Giordano Lanna
+# Date: 23/12/2024
+# Language: Python 3.11
+# -----------------------------------------------
+
 import pygame
 from pygame.locals import *
 
@@ -18,15 +25,12 @@ LIGHTBLUE = (120, 140, 220)
 BLUE = (25, 120, 185)
 DARKBLUE = (102, 105, 105)
 GREEN = (90, 210, 70)
+LIGHTGREEN = (112, 186, 162)
 YELLOW = (180, 210, 15)
 RED = (160, 25, 20)
 DARKRED = (80, 15, 0)
 PURPLE = (135, 45, 115)
 colors = [None, GREEN, YELLOW, RED, PURPLE, BLACK]
-
-# imagens
-screen1 = "data/image/background_1.jpg"
-screen2 = "data/image/background_6.png"
 
 # fonte
 number_font = pygame.font.SysFont('padrão', 54)
@@ -39,6 +43,8 @@ font_4 = pygame.font.SysFont('padrão', 46)
 font_5 = pygame.font.SysFont('padrão', 52)
 font_6 = pygame.font.SysFont('padrão', 42)
 font_7 = pygame.font.SysFont('padrão', 44)
+font_8 = pygame.font.SysFont('padrão', 26)
+
 
 # screen settings
 height = 620
@@ -51,6 +57,10 @@ delay = 15
 logo = pygame.image.load("data/image/image_game.png")
 pygame.display.set_caption('Py Of All Bombs')
 pygame.display.set_icon(logo)
+
+# imagens
+screen1 = "data/image/background_1.jpg"
+screen2 = "data/image/background_6.png"
 
 # Carregue as imagens com transparência
 button1 = pygame.image.load('data/image/button_blue1.png').convert_alpha()
@@ -91,3 +101,6 @@ size_box_hard = 40, 40
 size_box_easy = 50, 50
 internal_box = 35, 35
 size_button = 270, 75
+
+# textos
+text_info = ["___<| Fácil |>___", "12x9", "200 segundos", "___<| Difícil |>___", "16x12", "350 segundo"]
