@@ -1,7 +1,6 @@
 # -----------------------------------------------
 # Program: Campo Minado
-# Developers: Giordano Lanna
-# Date: 18/04/2024
+# Date: 24/12/2024
 # Language: Python 3.11
 # -----------------------------------------------
 
@@ -55,7 +54,7 @@ class DifficultyMenu(Menu):
             for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
-                    self.quitting()
+                    quitting()
 
                 if event.type == pygame.MOUSEBUTTONUP:
                     clicked_button = self.get_events()
@@ -104,7 +103,7 @@ class DifficultyMenu(Menu):
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.quitting()
+                    quitting()
 
                 if event.type == MOUSEBUTTONUP:
                     if self.button_return.collision_point(pygame.mouse.get_pos()):
@@ -177,6 +176,7 @@ class DifficultyMenu(Menu):
                 return button
         return None
 
-    def quitting(self):
+    @staticmethod
+    def quitting():
         pygame.quit()
         sys.exit()

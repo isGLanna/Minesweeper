@@ -1,7 +1,7 @@
 # -----------------------------------------------
 # Program: Campo Minado
-# Developers: Giordano Lanna e Elisa Ribeiro
-# Date: 21/12/2024
+# Developers: Giordano Lanna
+# Date: 21/04/2024
 # Language: Python 3.11
 # -----------------------------------------------
 import pygame
@@ -10,6 +10,10 @@ from MainMenu import MainMenu
 from random import randint
 
 pygame.init()
+
+
+# >>---------------------------------- FUNÇÃO PRINCIPAL DO MENU ----------------------------------<< #
+
 
 if __name__ == "__main__":
     game = MainMenu()

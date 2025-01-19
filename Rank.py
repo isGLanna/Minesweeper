@@ -16,7 +16,7 @@ def create_table():
     if not cursor.fetchone():
         cursor.execute("CREATE TABLE  IF NOT EXISTS players (name text, time integer, level integer)")
         database.commit()
-    
+
     database.close()
 
 # insere 'players' no banco de dados
@@ -69,5 +69,4 @@ def fetch_players():
     return easy_level_row, hard_level_row
 
 create_table()
-
 

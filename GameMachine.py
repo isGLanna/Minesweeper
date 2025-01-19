@@ -2,7 +2,7 @@
 # Program: Campo Minado
 # Developers: Giordano Lanna
 # Date: 23/12/2024
-# Language: Python 3.11
+# Language: Python 3.11'
 # -----------------------------------------------
 
 from Settings import *
@@ -102,7 +102,7 @@ class GameMachine:
         return count
 
     def declare_defeat(self):
-        self.make_sound(sound_lose)
+        make_sound(sound_lose)
 
         pos = self.get_position_bomb()
         matrix = self.get_matrix_above()
@@ -110,7 +110,7 @@ class GameMachine:
             matrix[i][j] = empty
         self.draw_number()
 
-        self.transparent_surface()
+        transparent_surface()
         text = font_2.render('DERROTA', True, RED)
         text_rect = text.get_rect()
         text_rect.midtop = (width // 2, height // 2 - 25)
@@ -118,7 +118,7 @@ class GameMachine:
         pygame.display.flip()
 
         self.lucky.restart_lucky()
-        return self.time_to_exit()
+        return time_to_exit()
 
     def declare_win(self, last_render):
         matrix, bombs, bombs_revealed = self.get_matrix_above(), self.get_bombs(), self.get_revealed()
@@ -139,10 +139,10 @@ class GameMachine:
 
         self.player.save_data_player()
 
-        self.make_sound(sound_win)
+        make_sound(sound_win)
 
         # exibir vitória
-        self.transparent_surface()
+        transparent_surface()
         text = font_2.render('VITORIA', True, GREEN)
         text_rect = text.get_rect()
         text_rect.midtop = (width // 2, height // 2 - 25)
@@ -150,7 +150,7 @@ class GameMachine:
         pygame.display.flip()
         clock.tick(1)
         self.lucky.restart_lucky()
-        return self.time_to_exit()
+        return time_to_exit()
 
     def discover(self, x, y):
         h, w = self.w, self.h
@@ -175,7 +175,7 @@ class GameMachine:
     def function_lucky(self):
         # revela campo vazio
         def realese_cell():
-            var1, var2 = randint(0, self.w - 1), randint(0, self.h -1)
+            var1, var2 = randint(0, self.w - 1), randint(0, self.h - 1)
             if self.matrix_above[var1][var2] == -1:
                 self.matrix_above[var1][var2] = empty
                 return self.matrix_above
@@ -204,7 +204,8 @@ class GameMachine:
                 realese_mine()
 
     # Função para exibir o efeito de transparência (mesma do código original)
-    def transparent_surface(self):
+    @staticmethod
+    def transparent_surface():
         corners_radius = 25
         transparent = pygame.Surface((width, height), pygame.SRCALPHA)
         transparent.set_alpha(200)
@@ -212,7 +213,8 @@ class GameMachine:
         display.blit(transparent, (width // 2 - 115, 280))
         pygame.display.update()
 
-    def time_to_exit(self):
+    @staticmethod
+    def time_to_exit():
         timer = 0
         while True:
             for event in pygame.event.get():
@@ -263,7 +265,8 @@ class GameMachine:
                         else:
                             display.blit(self.mine_image, ((x * 40) + 20 - 4, (y * 40) + 120 - 6))
 
-    def make_sound(self, audio):
+    @staticmethod
+    def make_sound(audio):
         audio.play()
 
     def set_matrix_above(self, matrix_above): self.matrix_above = matrix_above

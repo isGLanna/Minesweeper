@@ -41,7 +41,7 @@ class MainMenu(Menu):
             for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
-                    self.quitting()
+                    quitting()
 
                 if event.type == pygame.MOUSEBUTTONUP:
                     clicked_button = self.get_events()
@@ -60,7 +60,7 @@ class MainMenu(Menu):
                             self.show()
 
                         elif clicked_button == self.button_exit:
-                            self.quitting()
+                            quitting()
 
             self.button_start.print_display(pygame.mouse.get_pos())
             self.button_rank.print_display(pygame.mouse.get_pos())
@@ -75,6 +75,7 @@ class MainMenu(Menu):
                 return button
         return None
 
-    def quitting(self):
+    @staticmethod
+    def quitting():
         pygame.quit()
         sys.exit()
