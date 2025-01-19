@@ -1,10 +1,3 @@
-# -----------------------------------------------
-# Program: Campo Minado
-# Developers: Giordano Lanna e Elisa Ribeiro
-# Date: 23/12/2024
-# Language: Python 3.11
-# -----------------------------------------------
-
 from GameMachine import GameMachine
 from ButtonTypes import *
 from Settings import *
@@ -14,9 +7,8 @@ def current_match(level, player):  # Função interna do jogo campo minado
 
     match = GameMachine(level, player)
 
-    while True:
         # >>---------------------------------- FUNÇÃO INTERNA DE JOGO ----------------------------------<< #
-
+    while True:
         # Geração do campo minado
         m, n, bomb = match.difficulty()
 
