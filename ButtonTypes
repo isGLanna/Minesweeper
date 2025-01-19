@@ -69,7 +69,6 @@ class Buttons:
         self.text_rect = self.text_surface.get_rect(center=self.rect.center)
         self.image_up.blit(self.text_surface, self.text_rect)
         self.image_down.blit(self.text_surface, self.text_rect)
-        clock.tick(FPS)
 
     # atualizar botão de acordo com ponteiro
     def print_display(self, mouse_pos):
