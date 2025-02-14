@@ -1,71 +1,67 @@
-# Minesweeper Project - Python Implementation
+# Projeto Campo Minado - Implementação em Python
 
-## About the Project
+## Sobre o Projeto
 
-This project was developed in Python, using the **pygame** and **sqlite3** libraries. These technologies were chosen for their simplicity and suitability for developing basic games that do not require complex database relationships.
+Este projeto foi desenvolvido em Python, utilizando as bibliotecas **pygame** e **sqlite3**. Essas tecnologias foram escolhidas por sua simplicidade e adequação ao desenvolvimento de jogos básicos que não exigem relacionamentos complexos de banco de dados.
 
-### Important Notes
+### Notas Importantes
 
-- This code is not an ideal example for a project, as it contains several decisions that deviate from object-oriented programming principles.
-- Python standards and conventions (PEP8) were not strictly followed.
-- The code contains comments that may be considered "writing clutter" and are not relevant to the program's functionality.
+- Este código não é um exemplo ideal para um projeto, pois contém várias decisões que se desviam dos princípios da programação orientada a objetos.
+- Os padrões e convenções do Python (PEP8) não foram seguidos estritamente.
+- O código contém comentários que podem ser considerados "poluição de escrita" e não são relevantes para a funcionalidade do programa.
 
-## Code Structure
+## Estrutura do Código
 
-### Initial Configurations
+### Configurações Iniciais
 
-Default configurations are defined, such as:
+As configurações padrão são definidas, tais como:
 
-- **Colors**
-- **Main variables**
+- **Cores**
+- **Variáveis principais**
 - **Volume**
-- **Fonts**
-- **Images**
-- **Screen settings**
+- **Fontes**
+- **Imagens**
+- **Configurações da tela**
 
-### Main Loop
+### Loop Principal
 
-- The code begins in the main loop at the end, calling the `main_menu()` function.
-- In the main menu, "Button" objects are created, receiving parameters such as size, name, and position.
-- The loop waits for interactions (collisions) with the buttons, which return an "action" to the main loop.
+- O código começa no loop principal, chamando a função `main_menu()`.
+- No menu principal, objetos "Button" são criados, recebendo parâmetros como tamanho, nome e posição.
+- O loop aguarda interações (colisões) com os botões, que retornam uma "ação" para o loop principal.
 
-### Starting the Game
+### Início do Jogo
 
-- After selecting the options to play and naming a player, the match (`current_match`) starts.
-- Field properties are defined based on the number of bombs and the map size.
-- Two matrices are created:
-  - **Base matrix**: Contains numbers, bombs, and empty fields.
-  - **Game matrix**: Contains unrevealed boxes and flags.
-- Flags and the luck counter are loaded on the screen before calling `request_image_rendering_user()`.
+- Após selecionar as opções para jogar e nomear um jogador, a partida (`current_match`) é iniciada.
+- As propriedades do campo são definidas com base no número de bombas e no tamanho do mapa.
+- Duas matrizes são criadas:
+  - **Matriz base**: contém números, bombas e campos vazios.
+  - **Matriz do jogo**: contém caixas não reveladas e bandeiras.
+- As bandeiras e o contador de sorte são carregados na tela antes da chamada de `request_image_rendering_user()`.
 
-### Game Rendering
+### Renderização do Jogo
 
-- Button settings are adjusted according to the difficulty level.
-- An internal rendering loop begins:
-  - **Main variables**:
-    - `count`: Counts the loop iterations to calculate time.
-    - `last_render`: Analyzes if the player won after the last click.
-  - The loop updates the buttons only when clicks occur.
+- As configurações dos botões são ajustadas conforme o nível de dificuldade.
+- Um loop interno de renderização é iniciado:
+  - **Variáveis principais**:
+    - `count`: conta as iterações do loop para calcular o tempo.
+    - `last_render`: analisa se o jogador venceu após o último clique.
+  - O loop atualiza os botões apenas quando ocorrem cliques.
 
-### Click Management
+### Gerenciamento de Cliques
 
-The `click_manager` function manages the actions performed in the game:
+A função `click_manager` gerencia as ações realizadas no jogo:
 
-- It receives the matrix, size, and positions of the boxes in play.
-- It checks two main actions:
-  - **Right-click**: Sets a flag.
-  - **Left-click**: Presses and opens the map.
+- Recebe a matriz, o tamanho e as posições das caixas em jogo.
+- Verifica duas ações principais:
+  - **Clique direito**: define uma bandeira.
+  - **Clique esquerdo**: pressiona e abre o mapa.
 
 ---
 
-## Requirements
+## Requisitos
 
 - Python 3.x
-- Required libraries:
+- Bibliotecas necessárias:
   ```bash
   pip install pygame
   pip install sqlite3
-
-## Contributions
-
-This project is open to contributions from any user who wishes to participate. However, it is recommended to refactor the code to align with Python best practices and to improve both readability and maintainability.
