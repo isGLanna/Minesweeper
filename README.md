@@ -6,7 +6,7 @@ Este projeto foi desenvolvido em Python, utilizando as bibliotecas **pygame** e 
 
 ### Notas Importantes
 
-- Este código não é um exemplo ideal para um projeto, pois contém várias decisões que se desviam dos princípios da programação orientada a objetos, código limpo e boas pratica.
+- Este código não é um exemplo ideal para um bom projeto, pois contém várias decisões que se desviam dos princípios da programação orientada a objetos, código limpo e boas pratica.
 - Os padrões e convenções do Python (PEP8) não foram seguidos estritamente.
 - O código contém comentários que podem ser considerados "poluição de escrita" e não são relevantes para a funcionalidade do programa.
 
